@@ -25,8 +25,8 @@ export const videoPostDtoValidation = (
 
     if (!Array.isArray(data.availableResolutions)) {
         errors.push({
-            field: 'availableResolutions',
             message: "Any<String>",
+            field: 'availableResolutions'
         });
     } else if (data.availableResolutions.length) {
         const existingResolutions = Object.values(availableResolutions);
@@ -35,15 +35,15 @@ export const videoPostDtoValidation = (
             data.availableResolutions.length < 1
         ) {
             errors.push({
-                field: 'availableResolutions',
                 message: "Any<String>",
+                field: 'availableResolutions',
             });
         }
         for (const resolution of data.availableResolutions) {
             if (!existingResolutions.includes(resolution)) {
                 errors.push({
-                    field: 'resolution',
                     message: "Any<String>",
+                    field: 'resolution',
                 });
                 break;
             }

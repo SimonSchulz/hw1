@@ -11,7 +11,7 @@ export const videoPutDtoValidation = (
         ||data.title.trim().length < 2 ||
         data.title.trim().length > 40
     ) {
-        errors.push({ field: 'title', message: "Any<String>" });
+        errors.push({ message: "Any<String>", field: 'title'});
     }
 
     if (
@@ -19,18 +19,18 @@ export const videoPutDtoValidation = (
         ||data.author.trim().length < 2 ||
         data.author.trim().length > 20
     ) {
-        errors.push({ field: 'author', message: "Any<String>" });
+        errors.push({ message: "Any<String>", field: 'author' });
     }
     if (
         !data.canBeDownloaded || typeof  data.author !== 'boolean'
     ) {
-        errors.push({ field: 'canBeDownloaded', message: "Any<String>" });
+        errors.push({ message: "Any<String>", field: 'canBeDownloaded',});
     }
 
     if (!Array.isArray(data.availableResolutions)) {
         errors.push({
-            field: 'availableResolutions',
             message: "Any<String>",
+            field: 'availableResolutions',
         });
     } else if (data.availableResolutions.length) {
         const existingResolutions = Object.values(availableResolutions);
@@ -39,15 +39,15 @@ export const videoPutDtoValidation = (
             data.availableResolutions.length < 1
         ) {
             errors.push({
-                field: 'availableResolutions',
                 message: "Any<String>",
+                field: 'availableResolutions',
             });
         }
         for (const resolution of data.availableResolutions) {
             if (!existingResolutions.includes(resolution)) {
                 errors.push({
+                    message: "Any<String>",
                     field: 'resolution',
-                    message: "Any<String>" + resolution,
                 });
                 break;
             }
