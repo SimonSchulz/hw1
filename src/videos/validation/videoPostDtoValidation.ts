@@ -1,9 +1,9 @@
-import {VideoInputDto} from "../dto/video.input-dto";
+import {VideoPostDto} from "../dto/video.post-dto";
 import {ValidationError} from "../types/validationError";
 import {availableResolutions} from "../types/video";
 
-export const videoInputDtoValidation = (
-    data: VideoInputDto,
+export const videoPostDtoValidation = (
+    data: VideoPostDto,
 ): ValidationError[] => {
     const errors: ValidationError[] = [];
 
@@ -12,7 +12,7 @@ export const videoInputDtoValidation = (
         ||data.title.trim().length < 2 ||
         data.title.trim().length > 40
     ) {
-        errors.push({ field: 'title', message: 'Invalid title' });
+        errors.push({ field: 'title', message: "Any<String>" });
     }
 
     if (
@@ -20,13 +20,13 @@ export const videoInputDtoValidation = (
         ||data.author.trim().length < 2 ||
         data.author.trim().length > 20
     ) {
-        errors.push({ field: 'author', message: 'Invalid author' });
+        errors.push({ field: 'author', message: "Any<String>" });
     }
 
     if (!Array.isArray(data.availableResolutions)) {
         errors.push({
             field: 'availableResolutions',
-            message: 'availableResolutions must be array',
+            message: "Any<String>",
         });
     } else if (data.availableResolutions.length) {
         const existingResolutions = Object.values(availableResolutions);
@@ -36,14 +36,14 @@ export const videoInputDtoValidation = (
         ) {
             errors.push({
                 field: 'availableResolutions',
-                message: 'Invalid availableResolutions',
+                message: "Any<String>",
             });
         }
         for (const resolution of data.availableResolutions) {
             if (!existingResolutions.includes(resolution)) {
                 errors.push({
                     field: 'resolution',
-                    message: 'Invalid availableResolutions:' + resolution,
+                    message: "Any<String>",
                 });
                 break;
             }

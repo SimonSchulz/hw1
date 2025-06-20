@@ -2,9 +2,10 @@ import { Request, Response, Router } from 'express';
 import { HttpStatus } from '../../core/types/http-statuses';
 import { Video } from '../types/video';
 import {createdDate, db, publicationDate} from "../../core/db/mock-db-data";
-import {VideoInputDto} from "../dto/video.input-dto";
+import {VideoPostDto} from "../dto/video.post-dto";
 import {createErrorMessages} from "../../core/utils/error.utils";
-import {videoInputDtoValidation} from "../validation/videoInputDtoValidation";
+import {videoPostDtoValidation} from "../validation/videoPostDtoValidation";
+import {videoPutDtoValidation} from "../validation/videoPutDtoValidation";
 
 export const driversRouter = Router({});
 
@@ -15,20 +16,20 @@ driversRouter
 
     .get('/:id', (req: Request, res: Response) => {
         const id = parseInt(req.params.id);
-        const driver = db.videos.find((d) => d.id === id);
+        const video = db.videos.find((d) => d.id === id);
 
-        if (!driver) {
+        if (!video) {
             res
                 .status(HttpStatus.NotFound)
-                .send(createErrorMessages([{ field: 'id', message: 'Driver not found' }]),
+                .send(createErrorMessages([{ field: 'id', message: 'Video not found' }]),
                 );
             return;
         }
-        res.status(200).send(driver);
+        res.status(200).send(video);
     })
 
-    .post('', (req: Request<{}, {}, VideoInputDto>, res: Response) => {
-        const errors = videoInputDtoValidation(req.body);
+    .post('', (req: Request<{}, {}, VideoPostDto>, res: Response) => {
+        const errors = videoPostDtoValidation(req.body);
 
         if (errors.length > 0) {
             res.status(HttpStatus.BadRequest).send(createErrorMessages(errors));
@@ -57,26 +58,26 @@ driversRouter
             res
                 .status(HttpStatus.NotFound)
                 .send(
-                    createErrorMessages([{ field: 'id', message: 'Vehicle not found' }]),
+                    createErrorMessages([{ field: 'id', message: 'Video not found' }]),
                 );
             return;
         }
 
-        const errors = videoInputDtoValidation(req.body);
+        const errors = videoPutDtoValidation(req.body);
 
         if (errors.length > 0) {
             res.status(HttpStatus.BadRequest).send(createErrorMessages(errors));
             return;
         }
 
-        const driver = db.videos[index];
+        const video = db.videos[index];
 
-        driver.title = req.body.title;
-        driver.author = req.body.author
-        driver.canBeDownloaded = req.body.canBeDownloaded;
-        driver.minAgeRestriction = req.body.minAgeRestriction;
-        driver.publicationDate = req.body.publicationDate;
-        driver.availableResolutions = req.body.availableResolutions;
+        video.title = req.body.title;
+        video.author = req.body.author
+        video.canBeDownloaded = req.body.canBeDownloaded;
+        video.minAgeRestriction = req.body.minAgeRestriction;
+        video.publicationDate = req.body.publicationDate;
+        video.availableResolutions = req.body.availableResolutions;
         res.sendStatus(HttpStatus.NoContent);
     })
 
@@ -90,7 +91,7 @@ driversRouter
             res
                 .status(HttpStatus.NotFound)
                 .send(
-                    createErrorMessages([{ field: 'id', message: 'Vehicle not found' }]),
+                    createErrorMessages([{ field: 'id', message: 'video not found' }]),
                 );
             return;
         }

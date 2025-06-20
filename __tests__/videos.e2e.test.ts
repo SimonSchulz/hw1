@@ -1,7 +1,7 @@
 import request from 'supertest';
 import express from 'express';
 import {setupApp} from "../src/setup-app";
-import {VideoInputDto} from "../src/videos/dto/video.input-dto";
+import {VideoPostDto} from "../src/videos/dto/video.post-dto";
 import {HttpStatus} from "../src/core/types/http-statuses";
 import {availableResolutions} from "../src/videos/types/video";
 
@@ -10,7 +10,7 @@ describe('Video API', () => {
     setupApp(app);
     const mainUrl= '/hometask_01/api/videos';
 
-    const testVideoData: VideoInputDto = {
+    const testVideoData: VideoPostDto = {
         title: "The Godfather 2",
         author: "Mario Puzo",
         availableResolutions: [availableResolutions.P360, availableResolutions.P480, availableResolutions.P720, availableResolutions.P1080]
@@ -21,7 +21,7 @@ describe('Video API', () => {
     });
 
     it('should create video; POST /videos', async () => {
-        const newVideo: VideoInputDto = {
+        const newVideo: VideoPostDto = {
             ...testVideoData,
             title: "Sam's cat",
             author: 'Sam Smith',
