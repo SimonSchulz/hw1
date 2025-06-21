@@ -45,7 +45,7 @@ export const videoPutDtoValidation = (
             if (!existingResolutions.includes(resolution)) {
                 errors.push({
                     message: "Invalid type of resolution",
-                    field: 'resolution',
+                    field: 'availableResolutions',
                 });
                 break;
             }

@@ -41,7 +41,7 @@ export const videoPostDtoValidation = (
             if (!existingResolutions.includes(resolution)) {
                 errors.push({
                     message: "Invalid Resolution",
-                    field: 'resolution',
+                    field: 'availableResolutions',
                 });
                 break;
             }
