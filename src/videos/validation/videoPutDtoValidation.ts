@@ -1,6 +1,6 @@
 import {ValidationError} from "../types/validationError";
 import {availableResolutions, Video} from "../types/video";
-
+import {createdDate, publicationDate} from "../../core/db/mock-db-data";
 export const videoPutDtoValidation = (
     data: Video,
 ): ValidationError[] => {
@@ -29,6 +29,16 @@ export const videoPutDtoValidation = (
         data.minAgeRestriction <1 || data.minAgeRestriction >18
     ) {
         errors.push({ message: "invalid value of minAgeRestriction", field: 'minAgeRestriction',});
+    }
+    if (
+        !data.publicationDate || typeof data.publicationDate !=="string"
+    ) {
+        errors.push({ message: "invalid value of publicationDate", field: 'publicationDate',});
+    }
+    if (
+        !data.createdAt || typeof data.createdAt !=="string"
+    ) {
+        errors.push({ message: "invalid value of createdDate", field: 'createdDate',});
     }
 
 
