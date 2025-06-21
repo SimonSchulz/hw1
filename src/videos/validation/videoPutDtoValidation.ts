@@ -7,29 +7,27 @@ export const videoPutDtoValidation = (
     const errors: ValidationError[] = [];
 
     if (
-        !data.title || typeof  data.title !== 'string'
-        ||data.title.trim().length < 2 ||
+        !data.title || data.title.trim().length < 2 ||
         data.title.trim().length > 40
     ) {
-        errors.push({ message: "Any<String>", field: 'title'});
+        errors.push({ message: "Invalid title", field: 'title'});
     }
 
     if (
-        !data.author || typeof  data.author !== 'string'
-        ||data.author.trim().length < 2 ||
+        !data.author || data.author.trim().length < 2 ||
         data.author.trim().length > 20
     ) {
-        errors.push({ message: "Any<String>", field: 'author' });
+        errors.push({ message: "Invalid author", field: 'author' });
     }
     if (
-        !data.canBeDownloaded || typeof  data.author !== 'boolean'
+        !data.canBeDownloaded
     ) {
-        errors.push({ message: "Any<String>", field: 'canBeDownloaded',});
+        errors.push({ message: "invalid value of canBeDownloaded", field: 'canBeDownloaded',});
     }
 
     if (!Array.isArray(data.availableResolutions)) {
         errors.push({
-            message: "Any<String>",
+            message: "Invalid available resolutions",
             field: 'availableResolutions',
         });
     } else if (data.availableResolutions.length) {
@@ -39,14 +37,14 @@ export const videoPutDtoValidation = (
             data.availableResolutions.length < 1
         ) {
             errors.push({
-                message: "Any<String>",
+                message: "Invalid available resolutions",
                 field: 'availableResolutions',
             });
         }
         for (const resolution of data.availableResolutions) {
             if (!existingResolutions.includes(resolution)) {
                 errors.push({
-                    message: "Any<String>",
+                    message: "Invalid type of resolution",
                     field: 'resolution',
                 });
                 break;

@@ -8,24 +8,22 @@ export const videoPostDtoValidation = (
     const errors: ValidationError[] = [];
 
     if (
-        !data.title || typeof  data.title !== 'string'
-        ||data.title.trim().length < 2 ||
+        !data.title || data.title.trim().length < 2 ||
         data.title.trim().length > 40
     ) {
         errors.push({ field: 'title', message: "Any<String>" });
     }
 
     if (
-        !data.author || typeof  data.author !== 'string'
-        ||data.author.trim().length < 2 ||
+        !data.author || data.author.trim().length < 2 ||
         data.author.trim().length > 20
     ) {
-        errors.push({ field: 'author', message: "Any<String>" });
+        errors.push({ field: 'author', message: "Invalid Author" });
     }
 
     if (!Array.isArray(data.availableResolutions)) {
         errors.push({
-            message: "Any<String>",
+            message: "Invalid available resolutions",
             field: 'availableResolutions'
         });
     } else if (data.availableResolutions.length) {
@@ -35,14 +33,14 @@ export const videoPostDtoValidation = (
             data.availableResolutions.length < 1
         ) {
             errors.push({
-                message: "Any<String>",
+                message: "Invalid available Resolutions",
                 field: 'availableResolutions',
             });
         }
         for (const resolution of data.availableResolutions) {
             if (!existingResolutions.includes(resolution)) {
                 errors.push({
-                    message: "Any<String>",
+                    message: "Invalid Resolution",
                     field: 'resolution',
                 });
                 break;
