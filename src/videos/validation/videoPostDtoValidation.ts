@@ -11,7 +11,7 @@ export const videoPostDtoValidation = (
         !data.title || data.title.trim().length < 2 ||
         data.title.trim().length > 40
     ) {
-        errors.push({ field: 'title', message: "Any<String>" });
+        errors.push({ field: 'title', message: "Invalid Title" });
     }
 
     if (
