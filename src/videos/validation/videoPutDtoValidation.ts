@@ -8,19 +8,19 @@ export const videoPutDtoValidation = (
 
     if (
         !data.title || data.title.trim().length < 2 ||
-        data.title.trim().length > 40
+        data.title.trim().length > 40 || typeof data.title !=="string"
     ) {
         errors.push({ message: "Invalid title", field: 'title'});
     }
 
     if (
         !data.author || data.author.trim().length < 2 ||
-        data.author.trim().length > 20
+        data.author.trim().length > 20 || typeof data.author !=="string"
     ) {
         errors.push({ message: "Invalid author", field: 'author' });
     }
     if (
-        !data.canBeDownloaded
+        !data.canBeDownloaded || typeof data.canBeDownloaded !=="boolean"
     ) {
         errors.push({ message: "invalid value of canBeDownloaded", field: 'canBeDownloaded',});
     }
