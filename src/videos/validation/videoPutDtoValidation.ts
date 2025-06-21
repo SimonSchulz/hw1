@@ -28,7 +28,7 @@ export const videoPutDtoValidation = (
         !data.minAgeRestriction || typeof data.minAgeRestriction !=="number" ||
         data.minAgeRestriction <1 || data.minAgeRestriction >18
     ) {
-        errors.push({ message: "invalid value of canBeDownloaded", field: 'canBeDownloaded',});
+        errors.push({ message: "invalid value of minAgeRestriction", field: 'minAgeRestriction',});
     }
 
 
