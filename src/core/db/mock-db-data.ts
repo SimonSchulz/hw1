@@ -1,6 +1,8 @@
 import {availableResolutions, Video} from "../../videos/types/video";
-export const createdDate = new Date().toISOString();
-export const publicationDate = new Date(new Date().getTime()+86399997).toISOString();
+const date = new Date();
+const oneDayToMilliseconds = 60*60*24*1000;
+export const createdDate = date.toISOString();
+export const publicationDate = new Date(date.getTime()+oneDayToMilliseconds).toISOString();
 export const db = {
     videos: <Video[]>[
         {
