@@ -35,11 +35,11 @@ export const videoPutDtoValidation = (
     ) {
         errors.push({ message: "invalid value of publicationDate", field: 'publicationDate',});
     }
-    if (
-        !data.createdAt || typeof data.createdAt !=="string"
-    ) {
-        errors.push({ message: "invalid value of createdDate", field: 'createdDate',});
-    }
+    // if (
+    //     !data.createdAt || typeof data.createdAt !=="string"
+    // ) {
+    //     errors.push({ message: "invalid value of createdDate", field: 'createdDate',});
+    // }
 
 
     if (!Array.isArray(data.availableResolutions)) {
